@@ -136,7 +136,7 @@ const MOCK_QUESTIONS_BANK = {
 };
 
 // ─── ZUSTAND-LIKE STORE (pure React) ─────────────────────────────────────────
-function createStore(initialState) {
+function createStore(initialState: Record<string, any>) {
   let state = { ...initialState };
   const listeners = new Set();
   return {
