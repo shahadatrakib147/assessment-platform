@@ -136,19 +136,20 @@ const MOCK_QUESTIONS_BANK = {
 };
 
 // ─── ZUSTAND-LIKE STORE (pure React) ─────────────────────────────────────────
+// ─── ZUSTAND-LIKE STORE (pure React) ─────────────────────────────────────────
 function createStore(initialState: Record<string, any>) {
   let state = { ...initialState };
-  const listeners = new Set();
+  const listeners = new Set<() => void>();
   return {
     getState: () => state,
-    setState: (updater) => {
+    setState: (updater: any) => {
       state =
         typeof updater === "function"
           ? { ...state, ...updater(state) }
           : { ...state, ...updater };
       listeners.forEach((l) => l());
     },
-    subscribe: (listener) => {
+    subscribe: (listener: () => void) => {
       listeners.add(listener);
       return () => listeners.delete(listener);
     },
@@ -157,20 +158,20 @@ function createStore(initialState: Record<string, any>) {
 
 const store = createStore({
   currentUser: null,
-  role: null, // 'employer' | 'candidate'
-  view: "home", // home | employerLogin | candidateLogin | employerDashboard | candidateDashboard | createTest | exam
+  role: null,
+  view: "home",
   exams: MOCK_EXAMS,
   questions: MOCK_QUESTIONS_BANK,
   examInProgress: null,
   tabSwitches: 0,
 });
 
-function useStore(selector) {
+function useStore(selector: (state: Record<string, any>) => any) {
   const [val, setVal] = useState(() => selector(store.getState()));
   useEffect(() => {
     const unsub = store.subscribe(() => {
       const next = selector(store.getState());
-      setVal((prev) => (JSON.stringify(prev) !== JSON.stringify(next) ? next : prev));
+      setVal((prev: any) => (JSON.stringify(prev) !== JSON.stringify(next) ? next : prev));
     });
     return unsub;
   }, []);
