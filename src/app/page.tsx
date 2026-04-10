@@ -136,20 +136,19 @@ const MOCK_QUESTIONS_BANK = {
 };
 
 // ─── ZUSTAND-LIKE STORE (pure React) ─────────────────────────────────────────
-// ─── ZUSTAND-LIKE STORE (pure React) ─────────────────────────────────────────
 function createStore(initialState: Record<string, any>) {
   let state = { ...initialState };
-  const listeners = new Set<() => void>();
+  const listeners = new Set();
   return {
     getState: () => state,
-    setState: (updater: any) => {
+    setState: (updater) => {
       state =
         typeof updater === "function"
           ? { ...state, ...updater(state) }
           : { ...state, ...updater };
       listeners.forEach((l) => l());
     },
-    subscribe: (listener: () => void) => {
+    subscribe: (listener) => {
       listeners.add(listener);
       return () => listeners.delete(listener);
     },
@@ -158,8 +157,8 @@ function createStore(initialState: Record<string, any>) {
 
 const store = createStore({
   currentUser: null,
-  role: null,
-  view: "home",
+  role: null, // 'employer' | 'candidate'
+  view: "home", // home | employerLogin | candidateLogin | employerDashboard | candidateDashboard | createTest | exam
   exams: MOCK_EXAMS,
   questions: MOCK_QUESTIONS_BANK,
   examInProgress: null,
