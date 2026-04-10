@@ -146,7 +146,7 @@ function createStore(initialState: Record<string, any>) {
         typeof updater === "function"
           ? { ...state, ...updater(state) }
           : { ...state, ...updater };
-      listeners.forEach((l) => l());
+      listeners.forEach((l: any) => l());
     },
     subscribe: (listener) => {
       listeners.add(listener);
