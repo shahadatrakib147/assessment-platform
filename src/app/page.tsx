@@ -173,7 +173,7 @@ function useStore(selector: (state: Record<string, any>) => any) {
       const next = selector(store.getState());
       setVal((prev: any) => (JSON.stringify(prev) !== JSON.stringify(next) ? next : prev));
     });
-    return unsub;
+    return () => { unsub(); };
   }, []);
   return val;
 }
