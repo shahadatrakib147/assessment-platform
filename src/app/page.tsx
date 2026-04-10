@@ -141,7 +141,7 @@ function createStore(initialState: Record<string, any>) {
   const listeners = new Set();
   return {
     getState: () => state,
-    setState: (updater) => {
+    setState: (updater: any) => {
       state =
         typeof updater === "function"
           ? { ...state, ...updater(state) }
