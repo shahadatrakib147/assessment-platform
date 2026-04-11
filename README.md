@@ -5,10 +5,10 @@ Built for Akij iBOS Ltd. Frontend Engineer Assessment
 https://github.com/shahadatrakib147/assessment-platform
 
 ##  Live Demo
-(https://assessment-platform-virid.vercel.app/)
+https://assessment-platform-virid.vercel.app
 
 ##  Video Walkthrough
-(https://www.loom.com/share/14df2debd9084decbdfb967536bc8dfc)
+https://www.loom.com/share/14df2debd9084decbdfb967536bc8dfc
 
 ##  Setup Instructions
 npm install
