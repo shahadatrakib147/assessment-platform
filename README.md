@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Online Assessment Platform
+Built for Akij iBOS Ltd. Frontend Engineer Assessment
 
-## Getting Started
+##  GitHub Repository
+https://github.com/shahadatrakib147/assessment-platform
 
-First, run the development server:
+##  Live Demo
+[https://your-vercel-link-here.vercel.app](https://assessment-platform-virid.vercel.app/)
 
-```bash
+##  Video Walkthrough
+[https://your-loom-link-here](https://www.loom.com/share/14df2debd9084decbdfb967536bc8dfc)
+
+##  Setup Instructions
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  Demo Credentials
+**Employer Portal**
+Email: hr@akijibos.com
+Password: employer123
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Candidate Portal**
+Email: rakib@candidate.com
+Password: candidate123
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+##  Tech Stack
+- Next.js 14 (App Router)
+- React 18 with TypeScript
+- Custom Zustand-like state management
+- Form validation with typed error handling
+- Tailwind-compatible CSS with CSS variables
+- IBM Plex Sans + Plus Jakarta Sans typography
 
-## Learn More
+##  Features Implemented
+**Employer Panel**
+- Login with form validation
+- Dashboard with exam cards (candidates, slots, question sets)
+- View Candidates modal
+- Multi-step Create Test form (Basic Info + Question Sets)
+- Add / Edit / Delete questions (Radio, Checkbox, Text types)
 
-To learn more about Next.js, take a look at the following resources:
+**Candidate Panel**
+- Login with form validation
+- Dashboard showing available exams
+- Full exam screen with countdown timer
+- Auto-submit on timeout
+- Manual submit option
+- Tab switch detection and recording
+- Question navigator dots
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+##  MCP Integration
+I explored using Figma MCP to sync design tokens directly from the
+Figma file into the codebase, eliminating manual copy-paste of colors,
+spacing, and typography. I also explored Supabase MCP for AI-assisted
+database schema generation and query building directly from the editor.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##  AI Tools Used
+- **Claude Code** — component architecture, TypeScript typing, logic design
+- **GitHub Copilot** — inline autocomplete during development
+- **ChatGPT** — brainstorming state management approach
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Offline Mode Strategy
+I would use the Service Worker API with Cache Storage to cache all
+question data on exam start. Candidate answers would be persisted
+locally using IndexedDB (via idb-keyval) as they answer each question.
+On reconnect, a background sync queue would automatically push saved
+answers to the backend (Supabase), ensuring zero data loss even if
+the candidate loses internet mid-exam.
